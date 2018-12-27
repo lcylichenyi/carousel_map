@@ -1,0 +1,1 @@
+carousel_map(digtal_monster)

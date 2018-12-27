@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>carousel_map</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        ul,li,span{
+            height: 100%;
+            width: 100%;
+        }
+        ul{
+            display: flex;
+        }
+        li{
+            position: relative;
+            list-style: none;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            flex: 1;
+            margin-left: -1px;
+            /*不然会有缝隙*/
+        }
+        .outer{
+            width: 400px;
+            height: 196px;
+            margin: 300px auto;
+            transform: rotate3d(1,1,0,-30deg);
+            transform-style: preserve-3d;
+        }
+        span{
+            position: absolute;
+        }
+        .outer li span:first-of-type{
+            background-image: url("./pic/1.gif");
+            transform: translateZ(-238px) rotateX(180deg);
+        }
+        .outer li span:nth-of-type(2){
+            background-image: url("./pic/2.gif");
+            transform: translateZ(238px);
+        }
+        .outer li span:nth-of-type(3){
+            background-image: url("./pic/3.gif");
+            transform: translateZ(167.5px) translateY(-165.5px) rotateX(45deg);
+        }
+        .outer li span:nth-of-type(4){
+            background-image: url("./pic/4.gif");
+            transform: translateZ(-167.5px) translateY(-165.5px) rotateX(-225deg);
+        }
+        .outer li span:nth-of-type(5){
+            background-image: url("./pic/5.gif");
+            transform: translateY(-235.5px) rotateX(90deg);
+        }
+        .outer li span:nth-of-type(6){
+            background-image: url("./pic/6.gif");
+            transform: translateZ(167.5px) translateY(165.5px) rotateX(-45deg);
+        }
+        .outer li span:nth-of-type(7) {
+            background-image: url("./pic/7.gif");
+            transform: translateZ(-167.5px) translateY(165.5px) rotateX(225deg);
+        }
+
+        .outer li span:nth-of-type(8){
+            background-image: url("./pic/8.gif");
+            transform: translateY(235.5px) rotateX(270deg);
+        }
+        .outer ul li:nth-of-type(2) span{
+            background-position: -100% 0;
+        }
+        .outer ul li:nth-of-type(3) span{
+            background-position: -200% 0;
+        }
+        .outer ul li:nth-of-type(4) span{
+            background-position: -300% 0;
+        }
+        .outer ul li:nth-of-type(5) span{
+            background-position: -400% 0;
+        }
+
+        .arrow{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            line-height: 90px;
+            top: 50%;
+            background-color: rgba(0,0,0,.4);
+            font-size: 50px;
+            text-align: center;
+            text-decoration: none;
+            color: rgb(255,255,255);
+        }
+        .lt{
+            left: 150px;
+        }
+        .gt{
+            right: 150px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <ul>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+
+        </ul>
+
+    </div>
+    <a href="javascript:" class="gt arrow">&gt;</a>
+    <a href="javascript:" class="lt arrow">&lt;</a>
+    <script src="./extra/jquery/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+
+            var rotateDeg = 0,flag=true;
+            $(".gt").on("click",function () {
+                if (flag==true){
+                    flag = false;
+                    $("li").each(function (key,value) {
+                        $(this).css({
+                            "transform":"rotateX("+(rotateDeg-45)+"deg)",
+                            "transition-delay": 0.1*key +"s"
+                        })
+                    })
+                    rotateDeg -= 45;
+                    setTimeout(function () {
+                        flag = true;
+                    },800)
+                }
+
+            })
+            $(".lt").on("click",function () {
+                if (flag){
+                    flag = false;
+                    $("li").each(function (key,value) {
+
+                        $(this).css({
+                            "transform":"rotateX("+(rotateDeg+45)+"deg)",
+                            "transition-delay": 0.1*key +"s"
+                        })
+                    })
+                    rotateDeg += 45;
+                    setTimeout(function () {
+                        flag = true;
+                    },800)
+
+                }
+
+            })
+        })
+    </script>
+</body>
+</html>
